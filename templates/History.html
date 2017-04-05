@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    History
+{% endblock %}
+{% block header %}
+    <ul class="nav navbar-nav">
+            <li><a href="#">Home</a></li>
+            <li class="active"><a href="#">History</a></li>
+          </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">{{ name }}</a></li>
+                <li><a href = "#">SignOut</a></li>
+            </ul>
+{% endblock %}
+{% block body %}
+    <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:9px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;border-top-width:1px;border-bottom-width:1px;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:9px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;border-top-width:1px;border-bottom-width:1px;}
+.tg .tg-pam3{background-color:#ffffff;font-family:"Times New Roman", Times, serif !important;;color:#000000;text-align:center;vertical-align:top}
+.tg .tg-xirp{font-weight:bold;font-size:16px;font-family:Arial, Helvetica, sans-serif !important;;background-color:#c0c0c0;color:#000000;text-align:center;vertical-align:top}
+.tg .tg-be9z{font-weight:bold;font-size:16px;font-family:Arial, Helvetica, sans-serif !important;;background-color:#c0c0c0;color:#000000;vertical-align:top}
+</style>
+
+    <div class=" col-md-8 col-md-offset-2" align="center">
+        <h2 class="form-signin-heading" style="margin-top: 100px; text-align: center">History</h2>
+    <br>
+        <form style="align-content: right;" action="{% url 'delete_all' %}" method="get">
+            <button class="btn btn-primary" type="submit">Delete All</button>
+        </form>
+    <br>
+            <table class="tg" align="center">
+                <tr>
+                    <th class="tg-xirp">Query Name</th>
+                    <th class="tg-be9z">Module Used</th>
+                    <th class="tg-be9z">Status</th>
+                    <th class="tg-be9z">Results</th>
+                    <th class="tg-be9z">Time</th>
+                    <th class="tg-be9z">Delete History</th>
+                </tr>
+                {% for i in history %}
+                    <tr>
+                        <td class="tg-pam3">{{ i.query}}</td>
+                        <td class="tg-pam3">{{ i.module_used }}</td>
+                        <td class="tg-pam3">{{ i.status }}</td>
+                        <td class="tg-pam3"><a href="{% url 'history_results' username=i.username timestamp=i.time_stamp %}"
+                                               id="history_results" name="history_results">Click here</a></td>
+                        <td class="tg-pam3">{{ i.time_stamp }}</td>
+                        <td class="tg-pam3"><a href="{% url 'delete_result' username=i.username timestamp=i.time_stamp %}"
+                                               name="delete" id="delete">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    History
+{% endblock %}
+{% block header %}
+    <ul class="nav navbar-nav">
+            <li><a href="#">Home</a></li>
+            <li class="active"><a href="#">History</a></li>
+          </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">{{ name }}</a></li>
+                <li><a href = "#">SignOut</a></li>
+            </ul>
+{% endblock %}
+{% block body %}
+    <style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:9px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;border-top-width:1px;border-bottom-width:1px;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:9px 20px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;border-top-width:1px;border-bottom-width:1px;}
+.tg .tg-pam3{background-color:#ffffff;font-family:"Times New Roman", Times, serif !important;;color:#000000;text-align:center;vertical-align:top}
+.tg .tg-xirp{font-weight:bold;font-size:16px;font-family:Arial, Helvetica, sans-serif !important;;background-color:#c0c0c0;color:#000000;text-align:center;vertical-align:top}
+.tg .tg-be9z{font-weight:bold;font-size:16px;font-family:Arial, Helvetica, sans-serif !important;;background-color:#c0c0c0;color:#000000;vertical-align:top}
+</style>
+
+    <div class=" col-md-8 col-md-offset-2" align="center">
+        <h2 class="form-signin-heading" style="margin-top: 100px; text-align: center">History</h2>
+    <br>
+        <form style="align-content: right;" action="{% url 'Add_Post' %}">
+            <button class="btn btn-primary" type="submit">Add Row</button>
+        </form>
+    <br>
+            <table class="tg" >
+                <tr>
+                    <th class="tg-xirp">Cluster</th>
+                    <th class="tg-be9z">Sub-Cluster</th>
+                    <th class="tg-be9z">Congested</th>
+                    <th class="tg-be9z">Leakage</th>
+                    <th class="tg-be9z">DCR</th>
+                    <th class="tg-be9z">AFR</th>
+                    <th class="tg-be9z">Misc</th>
+                    <th class="tg-be9z">Analysis(Why this site is on the list)</th>
+                    <th class="tg-be9z">Last updated (Date)</th>
+                    <th class="tg-be9z">Comments (What can be done short term)</th>
+
+                    <th class="tg-be9z">Optimization Completed(Yes/No)</th>
+                    <th class="tg-be9z">Status(Complete/In-progress)</th>
+                    <th class="tg-be9z">Perm Solution (Describe the solution)</th>
+                    <th class="tg-be9z">Development Priority</th>
+                    <th class="tg-be9z">Cell Split</th>
+                    <th class="tg-be9z">Coverage Strategy</th>
+                    <th class="tg-be9z">DART</th>
+                    <th class="tg-be9z">Hardening National</th>
+                    <th class="tg-be9z">L1900 Capacity</th>
+                    <th class="tg-be9z">L2100 Capacity</th>
+                    <th class="tg-be9z">L700</th>
+                    <th class="tg-be9z">Market Infill</th>
+                    <th class="tg-be9z">Modernization</th>
+                    <th class="tg-be9z">New Build Infill</th>
+                    <th class="tg-be9z">Replacement</th>
+                    <th class="tg-be9z">ROB</th>
+                    <th class="tg-be9z">Rural America</th>
+                    <th class="tg-be9z">Sector Add</th>
+                    <th class="tg-be9z">Small Cell Strategy</th>
+                    <th class="tg-be9z">T-Mobile Store</th>
+                    <th class="tg-be9z">Venue ACS</th>
+                    <th class="tg-be9z">Cell Split ID</th>
+
+                </tr>
+                {% for post in posts %}
+                    <tr>
+                      <td>{{ post.Cluster }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+    </div>
+{% endblock %}
+
+
+
+<!--
+  <td class="tg-pam3">{{ i.Cluster }}</td>
+                        <td class="tg-pam3">{{ i.Sub_Cluster }}</td>
+                        <td class="tg-pam3">{{ i.Congested }}</td>
+                        <td class="tg-pam3">{{ i.Leakage }}</td>
+                        <td class="tg-pam3">{{ i.DCR }}</td>
+                        <td class="tg-pam3">{{ i.AFR }}</td>
+                        <td class="tg-pam3">{{ i.Misc }}</td>
+                        <td class="tg-pam3">{{ i.Analysis }}</td>
+                        <td class="tg-pam3">{{ i.Last_updated }}</td>
+                        <td class="tg-pam3">{{ i.Comments }}</td>
+                        <td class="tg-pam3">{{ i.Optimization_Completed }}</td>
+                        <td class="tg-pam3">{{ i.Status }}</td>
+                        <td class="tg-pam3">{{ i.Perm_Solution }}</td>
+                        <td class="tg-pam3">{{ i.Development_Priority }}</td>
+                        <td class="tg-pam3">{{ i.Cell_Split }}</td>
+                        <td class="tg-pam3">{{ i.Coverage_Strategy }}</td>
+                        <td class="tg-pam3">{{ i.DART }}</td>
+                        <td class="tg-pam3">{{ i.Hardening_National }}</td>
+                        <td class="tg-pam3">{{ i.L1900_Capacity }}</td>
+                        <td class="tg-pam3">{{ i.L2100_Capacity }}</td>
+                        <td class="tg-pam3">{{ i.L700 }}</td>
+                        <td class="tg-pam3">{{ i.Market_Infill }}</td>
+                        <td class="tg-pam3">{{ i.Modernization }}</td>
+                        <td class="tg-pam3">{{ i.New_Build_Infill }}</td>
+                        <td class="tg-pam3">{{ i.Replacement }}</td>
+                        <td class="tg-pam3">{{ i.ROB }}</td>
+                        <td class="tg-pam3">{{ i.Rural_America }}</td>
+                        <td class="tg-pam3">{{ i.Sector_Add }}</td>
+                        <td class="tg-pam3">{{ i.Small_Cell_Strategy }}</td>
+                        <td class="tg-pam3">{{ i.T_Mobile_Store }}</td>
+                        <td class="tg-pam3">{{ i.Venue_ACS }}</td>
+                        <td class="tg-pam3">{{ i.Cell_Split_ID }}</td>
+-->

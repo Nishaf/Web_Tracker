@@ -1,0 +1,144 @@
+{% extends 'base.html'%}
+
+{% block body %}
+
+    <div class="container">
+        <div class=" col-md-8 col-md-offset-2" style="margin-top: 50px;" align="center">
+            <h2>Fill Out all the Details of the Post</h2>
+        </div>
+        <div class="col-md-4 col-md-offset-4" style="margin-top: 30px;">
+            <form action="{% url 'Add_Post' %}" method="post">{% csrf_token %}
+              <div class="form-group">
+                <label for="1">Cluster</label>
+                <input type="text" class="form-control" id="1" name="1">
+              </div>
+              <div class="form-group">
+                <label for="2">Sub-Cluster</label>
+                <input type="text" class="form-control" id="2" name="2">
+              </div>
+                <div class="form-group">
+                <label for="3">Congested</label>
+                <input type="text" class="form-control" id="3" name="3">
+              </div>
+                <div class="form-group">
+                <label for="4">Leakage</label>
+                <input type="text" class="form-control" id="4" name="4">
+              </div>
+                <div class="form-group">
+                <label for="5">DCR</label>
+                <input type="text" class="form-control" id="5" name="5">
+              </div>
+                <div class="form-group">
+                <label for="6">AFR</label>
+                <input type="text" class="form-control" id="6" name="6">
+              </div>
+                <div class="form-group">
+                <label for="7">Misc</label>
+                <input type="text" class="form-control" id="7" name="7">
+              </div>
+                <div class="form-group">
+                <label for="8">Analysis(Why this site is on the list)</label>
+                <input type="text" class="form-control" id="8" name="8">
+              </div>
+                <div class="form-group">
+                <label for="9">Last updated (Date)</label>
+                <input type="text" class="form-control" id="9" name="9">
+              </div>
+                <div class="form-group">
+                <label for="10">Comments (What can be done short term)</label>
+                <input type="text" class="form-control" id="10" name="10">
+              </div>
+                <div class="form-group">
+                <label for="11">Optimization Completed(Yes/No)</label>
+                <input type="text" class="form-control" id="11" name="11">
+              </div>
+                <div class="form-group">
+                <label for="12">Status(Complete/In-progress)</label>
+                <input type="text" class="form-control" id="12" name="12">
+              </div>
+                <div class="form-group">
+                <label for="13">Perm Solution (Describe the solution)</label>
+                <input type="text" class="form-control" id="13" name="13">
+              </div>
+                <div class="form-group">
+                <label for="14">Development Priority</label>
+                <input type="text" class="form-control" id="14" name="14">
+              </div>
+                <div class="form-group">
+                <label for="15">Cell Split</label>
+                <input type="text" class="form-control" id="15" name="15">
+              </div>
+                <div class="form-group">
+                <label for="16">Coverage Strategy</label>
+                <input type="text" class="form-control" id="16" name="16">
+              </div>
+                <div class="form-group">
+                <label for="17">DART</label>
+                <input type="text" class="form-control" id="17" name="17">
+              </div>
+                <div class="form-group">
+                <label for="18">Hardening National</label>
+                <input type="text" class="form-control" id="18" name="18">
+              </div>
+                <div class="form-group">
+                <label for="19">L1900 Capacity</label>
+                <input type="text" class="form-control" id="19" name="19">
+              </div>
+                <div class="form-group">
+                <label for="20">L2100 Capacity</label>
+                <input type="text" class="form-control" id="20" name="20">
+              </div>
+                <div class="form-group">
+                <label for="21">L700</label>
+                <input type="text" class="form-control" id="21" name="21">
+              </div>
+                <div class="form-group">
+                <label for="22">Market Infill</label>
+                <input type="text" class="form-control" id="22" name="22">
+              </div>
+                <div class="form-group">
+                <label for="23">Modernization</label>
+                <input type="text" class="form-control" id="23" name="23">
+              </div>
+                <div class="form-group">
+                <label for="24">New Build Infill</label>
+                <input type="text" class="form-control" id="24" name="24">
+              </div>
+                <div class="form-group">
+                <label for="25">Replacement</label>
+                <input type="text" class="form-control" id="25" name="25">
+              </div>
+                <div class="form-group">
+                <label for="26">ROB</label>
+                <input type="text" class="form-control" id="26" name="26">
+              </div>
+                <div class="form-group">
+                <label for="27">Rural America</label>
+                <input type="text" class="form-control" id="27" name="27">
+              </div>
+                <div class="form-group">
+                <label for="28">Sector Add</label>
+                <input type="text" class="form-control" id="28" name="28">
+              </div>
+                <div class="form-group">
+                <label for="29">Small Cell Strategy</label>
+                <input type="text" class="form-control" id="29" name="29">
+              </div>
+                <div class="form-group">
+                <label for="30">T-Mobile Store</label>
+                <input type="text" class="form-control" id="30" name="30">
+              </div>
+                <div class="form-group">
+                <label for="31">Venue ACS</label>
+                <input type="text" class="form-control" id="31" name="31">
+              </div>
+                <div class="form-group">
+                <label for="32">Cell Split ID</label>
+                <input type="text" class="form-control" id="32" name="32">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
