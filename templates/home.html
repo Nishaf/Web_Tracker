@@ -25,7 +25,10 @@
     <div class=" col-md-8 col-md-offset-2" align="center">
         <h2 class="form-signin-heading" style="margin-top: 100px; text-align: center">History</h2>
     <br>
-    <a href="{% url 'blog_view' %}">Blog View</a>
+    <a href="{% url 'upload_file' %}">Upload File</a>
+        <br>
+        <a href="{% url 'blog_view' %}">Blog View</a>
+        <br>
         <form style="align-content: right;" action="{% url 'Add_Post' %}">
             <button class="btn btn-primary" type="submit">Add Row</button>
         </form>
@@ -114,7 +117,10 @@
                             </form>
                         </td>
                     <td class="tg-pam3">
-                            <a href="{% url 'add_image' username=post.username timestamp=post.timestamp sector=post.Sector%}" >View Image</a>
+                            <a href="{% url 'add_image' username=post.username timestamp=post.timestamp sector=post.Sector%}" >Add Image</a>
+                        </td>
+                    <td class="tg-pam3">
+                            <a href="{% url 'retrieve_image' username=post.username timestamp=post.timestamp sector=post.Sector%}" >View Image</a>
                         </td>
                     </tr>
                 {% endfor %}

@@ -1,6 +1,12 @@
 from django.contrib.auth.models import User
 from django import forms
 from django.core.validators import RegexValidator,EmailValidator
+from Images.models import PostImages
+
+
+class UploadFileForm(forms.Form):
+    title = forms.CharField(max_length=50)
+    file = forms.FileField()
 
 
 def hasNumbers(name):
@@ -19,6 +25,19 @@ class UserForm(forms.ModelForm):
     class Meta:
         model=User
         fields=['first_name','last_name','username','password','email','date_joined']
+
+
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = PostImages
+        fields = [
+            "username",
+            "timestamp",
+            "sector",
+            "image"
+        ]
+
 
 
 

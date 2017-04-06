@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.views.generic import View
 from django.contrib.sessions.models import Session
 from django.contrib.auth import authenticate, login,logout,user_logged_in
@@ -7,7 +7,11 @@ from .extra_functions import *
 from pymongo import *
 import base64
 import json
-from json import dumps
+from .forms import *
+import tablib
+
+from import_export import resources
+from Images.models import ExcelFiles
 ##PrimaryKey== Sector + user + timestamp
 
 class HomePage(View):
@@ -63,34 +67,60 @@ class AddImage(View):
         db = mongo['Database1']
         db.images.insert({"username": request.session['username'] ,"image":encoded_string})
 
+
+
+
     def retrieve_image(self,request):
         mongo = MongoClient()
         db = mongo['Database1']
-        data = db.images.find_one({'username': request.session['username']})
-        print(data)
-        mongo.close()
-        data1 = base64.b64decode(data['image'])
-        img = data1
-        img1 = img
-        print(img1)
-        #decode = img1.decode()
-        img_tag = '<img alt="sample" src="data:image/png;base64,{0}">'.format(img1.decode(base64))
-        return img_tag
+        dataa = db.images.find_one({'username': request.session['username']})
+        print(dataa)
+        data = dataa['image']
+        data1 = json.loads(json.dumps(data))
+        img = data1[0]
+        img1 = img['image']
+        decode = img1.decode()
+        img_tag = '<img alt="sample" src="data:image/png;base64,{0}">'.format(decode)
+        return HttpResponse(img_tag)
+
+    def get(self, request, username, timestamp, sector):
+        form = PostImages(request.GET or None)
+        context = {
+            "form": form,
+            "username":username,
+            "timestamp": timestamp,
+            "sector": sector,
+        }
+        return render(request, "add_image.html", context)
 
     def post(self, request, username, timestamp, sector):
-        #print(request.POST['image'])
         print(username)
         print(timestamp)
         print(sector)
-        #print(request.POST['image'])
-        self.insert_image(request)
-        return HttpResponse("Hello")
+        form = ImageForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            instance = form.save()
+            instance.save()
+            return HttpResponse("Added Successfully")
 
+
+class RetrieveImage(View):
     def get(self, request, username, timestamp, sector):
-        img_tag = self.retrieve_image(request)
-        return HttpResponse(img_tag)
+        instance = PostImages.objects.all().filter(username=username,timestamp=timestamp, sector=sector)
+        return render(request, 'view_image.html', {'instance':instance})
 
 
+class UploadExcelFile(View):
+    def get(self, request):
+        form = UploadFileForm()
+        return render(request, 'upload_file.html', {'form': form})
+
+    def post(self, request):
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            # file is saved
+            form.save()
+            return HttpResponse("Hello")
 
 
 class BlogView(View):
