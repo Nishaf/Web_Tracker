@@ -97,7 +97,11 @@ class UploadExcelFile(View):
         mongo = MongoClient()
         db = mongo['Database1']
         for i in range(1, sheet.nrows):
-            db.Table_data.insert(get_excel_data(i,time, sheet,request))
+            if sheet.cell_value(i,0) is None or sheet.cell_value(i,0) is "":
+                continue
+            else:
+                print(dict(get_excel_data(i,time,sheet, request)))
+                db.Table_data.insert(get_excel_data(i,time, sheet,request))
 
     def post(self, request):
         form = UploadFileForm(request.POST, request.FILES)
