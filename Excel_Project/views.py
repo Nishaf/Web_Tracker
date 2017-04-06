@@ -1,19 +1,12 @@
-from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
+from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import View
-from django.contrib.sessions.models import Session
 from django.contrib.auth import authenticate, login,logout,user_logged_in
-from .forms import *
 from .extra_functions import *
 from pymongo import *
-import base64
-import json
 from .forms import *
-import tablib
 import xlrd
-
-from import_export import resources
+import os
 from Images.models import ExcelFiles
-##PrimaryKey== Sector + user + timestamp
 
 class HomePage(View):
 
@@ -60,30 +53,6 @@ class EditPost(View):
         return HttpResponse("Successful")
 
 class AddImage(View):
-    def insert_image(self,request):
-        with open("E:/6th Semester/Psychology/Pyschology notes/3.jpeg", "rb") as image_file:
-            encoded_string = base64.b64encode(image_file.read())
-        print(encoded_string)
-        mongo = MongoClient()
-        db = mongo['Database1']
-        db.images.insert({"username": request.session['username'] ,"image":encoded_string})
-
-
-
-
-    def retrieve_image(self,request):
-        mongo = MongoClient()
-        db = mongo['Database1']
-        dataa = db.images.find_one({'username': request.session['username']})
-        print(dataa)
-        data = dataa['image']
-        data1 = json.loads(json.dumps(data))
-        img = data1[0]
-        img1 = img['image']
-        decode = img1.decode()
-        img_tag = '<img alt="sample" src="data:image/png;base64,{0}">'.format(decode)
-        return HttpResponse(img_tag)
-
     def get(self, request, username, timestamp, sector):
         form = PostImages(request.GET or None)
         context = {
@@ -105,7 +74,12 @@ class AddImage(View):
 class RetrieveImage(View):
     def get(self, request, username, timestamp, sector):
         instance = PostImages.objects.all().filter(username=username,timestamp=timestamp, sector=sector)
-        return render(request, 'view_image.html', {'instance':instance})
+        path = os.getcwd()
+        path = '/'.join(path.split('\\'))
+        for i in instance:
+            print(path+i.image.url)
+           # i.image.url = path+i.image.url
+        return render(request, 'view_image.html', {'instance':instance, 'path':path})
 
 
 class UploadExcelFile(View):
@@ -123,44 +97,7 @@ class UploadExcelFile(View):
         mongo = MongoClient()
         db = mongo['Database1']
         for i in range(1, sheet.nrows):
-            db.Table_data.insert({
-                    'timestamp': time,
-                    'username': request.session['username'],
-                    'Sector':sheet.cell_value(i,0),
-                    'Cluster':sheet.cell_value(i,1),
-                    'Sub-Cluster':sheet.cell_value(i,2),
-                    'Congested':sheet.cell_value(i,3),
-                    'Leakage':sheet.cell_value(i,4),
-                    'DCR':sheet.cell_value(i,5),
-                    'AFR':sheet.cell_value(i,6),
-                    'Misc':sheet.cell_value(i,7),
-                    'Analysis(Why this site is on the list)':sheet.cell_value(i,8),
-                    'Last updated (Date)':sheet.cell_value(i,9),
-                    'Comments (What can be done short term)':sheet.cell_value(i,10),
-
-                    'Optimization Completed(Yes/No)':sheet.cell_value(i,11),
-                    'Status(Complete/In-progress)':sheet.cell_value(i,12),
-                    'Perm Solution (Describe the solution)':sheet.cell_value(i,13),
-                    'Development Priority':sheet.cell_value(i,14),
-                    'Cell Split':sheet.cell_value(i,15),
-                    'Coverage Strategy':sheet.cell_value(i,16),
-                    'DART':sheet.cell_value(i,17),
-                    'Hardening National':sheet.cell_value(i,18),
-                    'L1900 Capacity':sheet.cell_value(i,19),
-                    'L2100 Capacity':sheet.cell_value(i,20),
-                    'L700':sheet.cell_value(i,21),
-                    'Market Infill':sheet.cell_value(i,22),
-                    'Modernization':sheet.cell_value(i,23),
-                    'New Build Infill':sheet.cell_value(i,24),
-                    'Replacement':sheet.cell_value(i,25),
-                    'ROB':sheet.cell_value(i,26),
-                    'Rural America':sheet.cell_value(i,27),
-                    'Sector Add':sheet.cell_value(i,28),
-                    'Small Cell Strategy':sheet.cell_value(i,29),
-                    'T-Mobile Store':sheet.cell_value(i,30),
-                    'Venue ACS':sheet.cell_value(i,31),
-                    'Cell Split ID':sheet.cell_value(i,32),
-            })
+            db.Table_data.insert(get_excel_data(i,time, sheet,request))
 
     def post(self, request):
         form = UploadFileForm(request.POST, request.FILES)
@@ -197,7 +134,7 @@ class Login(View):
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             if user.is_active:
-                login(request, user)
+                login(request , user)
                 request.session['username'] = user.username
                 return redirect('homepage')
             else:
