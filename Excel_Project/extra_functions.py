@@ -1,6 +1,8 @@
 from time import strftime,gmtime
 
 
+
+
 def get_post_data(request):
     return {
         'username': request.session['username'],

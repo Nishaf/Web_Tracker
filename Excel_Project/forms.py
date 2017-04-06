@@ -1,12 +1,16 @@
 from django.contrib.auth.models import User
 from django import forms
 from django.core.validators import RegexValidator,EmailValidator
-from Images.models import PostImages
+from Images.models import PostImages,ExcelFiles
 
 
-class UploadFileForm(forms.Form):
-    title = forms.CharField(max_length=50)
-    file = forms.FileField()
+class UploadFileForm(forms.ModelForm):
+    class Meta:
+        model = ExcelFiles
+        fields = [
+            "username",
+            "filee",
+        ]
 
 
 def hasNumbers(name):

@@ -9,6 +9,7 @@ import base64
 import json
 from .forms import *
 import tablib
+import xlrd
 
 from import_export import resources
 from Images.models import ExcelFiles
@@ -94,9 +95,6 @@ class AddImage(View):
         return render(request, "add_image.html", context)
 
     def post(self, request, username, timestamp, sector):
-        print(username)
-        print(timestamp)
-        print(sector)
         form = ImageForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             instance = form.save()
@@ -112,14 +110,65 @@ class RetrieveImage(View):
 
 class UploadExcelFile(View):
     def get(self, request):
-        form = UploadFileForm()
-        return render(request, 'upload_file.html', {'form': form})
+        form = UploadFileForm(request.GET or None, request.FILES)
+        return render(request, 'upload_file.html', {'form': form, 'username': request.session['username']})
+
+    def add_posts(self,request):
+        user = request.session['username']
+        file = ExcelFiles.objects.get(username=user)
+        print(file.filee.path)
+        book = xlrd.open_workbook(file.filee.path)
+        sheet = book.sheet_by_index(0)
+        mongo = MongoClient()
+        db = mongo['Database1']
+        for i in range(1, sheet.nrows):
+            db.Table_data.insert({
+                    'timestamp': strftime("%a, %d %b %Y %H:%M:%S", gmtime()),
+                    'username': request.session['username'],
+                    'Sector':sheet.cell_value(i,0),
+                    'Cluster':sheet.cell_value(i,1),
+                    'Sub-Cluster':sheet.cell_value(i,2),
+                    'Congested':sheet.cell_value(i,3),
+                    'Leakage':sheet.cell_value(i,4),
+                    'DCR':sheet.cell_value(i,5),
+                    'AFR':sheet.cell_value(i,6),
+                    'Misc':sheet.cell_value(i,7),
+                    'Analysis(Why this site is on the list)':sheet.cell_value(i,8),
+                    'Last updated (Date)':sheet.cell_value(i,9),
+                    'Comments (What can be done short term)':sheet.cell_value(i,10),
+
+                    'Optimization Completed(Yes/No)':sheet.cell_value(i,11),
+                    'Status(Complete/In-progress)':sheet.cell_value(i,12),
+                    'Perm Solution (Describe the solution)':sheet.cell_value(i,13),
+                    'Development Priority':sheet.cell_value(i,14),
+                    'Cell Split':sheet.cell_value(i,15),
+                    'Coverage Strategy':sheet.cell_value(i,16),
+                    'DART':sheet.cell_value(i,17),
+                    'Hardening National':sheet.cell_value(i,18),
+                    'L1900 Capacity':sheet.cell_value(i,19),
+                    'L2100 Capacity':sheet.cell_value(i,20),
+                    'L700':sheet.cell_value(i,21),
+                    'Market Infill':sheet.cell_value(i,22),
+                    'Modernization':sheet.cell_value(i,23),
+                    'New Build Infill':sheet.cell_value(i,24),
+                    'Replacement':sheet.cell_value(i,25),
+                    'ROB':sheet.cell_value(i,26),
+                    'Rural America':sheet.cell_value(i,27),
+                    'Sector Add':sheet.cell_value(i,28),
+                    'Small Cell Strategy':sheet.cell_value(i,29),
+                    'T-Mobile Store':sheet.cell_value(i,30),
+                    'Venue ACS':sheet.cell_value(i,31),
+                    'Cell Split ID':sheet.cell_value(i,32),
+            })
+        print(book.nsheets)
 
     def post(self, request):
         form = UploadFileForm(request.POST, request.FILES)
+        print(form)
         if form.is_valid():
-            # file is saved
-            form.save()
+            instance = form.save()
+            instance.save()
+            self.add_posts(request)
             return HttpResponse("Hello")
 
 

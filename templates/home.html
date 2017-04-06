@@ -24,15 +24,21 @@
 
     <div class=" col-md-8 col-md-offset-2" align="center">
         <h2 class="form-signin-heading" style="margin-top: 100px; text-align: center">History</h2>
-    <br>
-    <a href="{% url 'upload_file' %}">Upload File</a>
         <br>
-        <a href="{% url 'blog_view' %}">Blog View</a>
-        <br>
+        <div class="col-md-6">
+            <form action="{% url 'upload_file' %}" method="get">
+                <button class="btn-primary" type="submit">Upload File</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form action="{% url 'blog_view' %}" method="get">
+                <button  type="submit" class="btn-primary" href="">Blog View</button>
+            </form>
+        </div>
         <form style="align-content: right;" action="{% url 'Add_Post' %}">
             <button class="btn btn-primary" type="submit">Add Row</button>
         </form>
-    <br>
+            <br>
             <table class="tg" >
                 <tr>
                     <th class="tg-xirp">Sector</th>
@@ -71,6 +77,8 @@
                     <th class="tg-be9z">Cell Split ID</th>
                     <th class="tg-be9z">Edit Post</th>
                     <th class="tg-be9z">Add Images</th>
+                    <th class="tg-be9z">View Images</th>
+
 
 
                 </tr>
@@ -111,15 +119,9 @@
                         <td class="tg-pam3">{{ post.Cell_Split_ID }}</td>
                         <td class="tg-pam3"><a id="edit_post" name="edit_post" href="{% url 'edit_post' username=post.username timestamp=post.timestamp sector=post.Sector %}">Edit Post</a></td>
                         <td class="tg-pam3">
-                            <form action="{% url 'add_image' username=post.username timestamp=post.timestamp sector=post.Sector%}" method="post">{% csrf_token %}
-                                <input type="file" id="image" name="image">
-                                <button type="submit">Save</button>
-                            </form>
-                        </td>
-                    <td class="tg-pam3">
                             <a href="{% url 'add_image' username=post.username timestamp=post.timestamp sector=post.Sector%}" >Add Image</a>
                         </td>
-                    <td class="tg-pam3">
+                        <td class="tg-pam3">
                             <a href="{% url 'retrieve_image' username=post.username timestamp=post.timestamp sector=post.Sector%}" >View Image</a>
                         </td>
                     </tr>
