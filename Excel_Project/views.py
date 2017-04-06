@@ -24,7 +24,7 @@ class HomePage(View):
             mongo = MongoClient()
             db = mongo['Database1']
             context1 = db.Table_data.find()
-            MongoClient().close()
+            mongo.close()
             posts = [post for post in context1]
             mongo.close()
             return render(request,'home.html', {'posts': posts})
@@ -111,11 +111,12 @@ class RetrieveImage(View):
 class UploadExcelFile(View):
     def get(self, request):
         form = UploadFileForm(request.GET or None, request.FILES)
-        return render(request, 'upload_file.html', {'form': form, 'username': request.session['username']})
+        return render(request, 'upload_file.html', {'form': form, 'username': request.session['username'],
+                                                    'timestamp':strftime("%a, %d %b %Y %H:%M:%S", gmtime())})
 
-    def add_posts(self,request):
+    def add_posts(self,request, time):
         user = request.session['username']
-        file = ExcelFiles.objects.get(username=user)
+        file = ExcelFiles.objects.get(username=user,timestamp=time)
         print(file.filee.path)
         book = xlrd.open_workbook(file.filee.path)
         sheet = book.sheet_by_index(0)
@@ -123,7 +124,7 @@ class UploadExcelFile(View):
         db = mongo['Database1']
         for i in range(1, sheet.nrows):
             db.Table_data.insert({
-                    'timestamp': strftime("%a, %d %b %Y %H:%M:%S", gmtime()),
+                    'timestamp': time,
                     'username': request.session['username'],
                     'Sector':sheet.cell_value(i,0),
                     'Cluster':sheet.cell_value(i,1),
@@ -160,7 +161,6 @@ class UploadExcelFile(View):
                     'Venue ACS':sheet.cell_value(i,31),
                     'Cell Split ID':sheet.cell_value(i,32),
             })
-        print(book.nsheets)
 
     def post(self, request):
         form = UploadFileForm(request.POST, request.FILES)
@@ -168,8 +168,8 @@ class UploadExcelFile(View):
         if form.is_valid():
             instance = form.save()
             instance.save()
-            self.add_posts(request)
-            return HttpResponse("Hello")
+            self.add_posts(request, request.POST['timestamp'])
+            return redirect('homepage')
 
 
 class BlogView(View):
@@ -199,7 +199,7 @@ class Login(View):
             if user.is_active:
                 login(request, user)
                 request.session['username'] = user.username
-                return render(request, 'home.html', {'name':user})
+                return redirect('homepage')
             else:
                 return render(request, 'login.html', {'error_message': 'Invalid login'})
         return render(request, 'login.html')

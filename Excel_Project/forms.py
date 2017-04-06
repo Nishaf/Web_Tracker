@@ -9,6 +9,7 @@ class UploadFileForm(forms.ModelForm):
         model = ExcelFiles
         fields = [
             "username",
+            "timestamp",
             "filee",
         ]
 

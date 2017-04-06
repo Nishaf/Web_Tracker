@@ -8,12 +8,16 @@
         <div class="col-md-4 col-md-offset-4" style="margin-top: 30px;">
             <form action="{% url 'upload_file' %}" enctype="multipart/form-data" method="post">{% csrf_token %}
                 <div class="form-group">
-                <label for="sector">Username</label>
-                <input type="text" class="form-control" id="username" name="username" value="{{ username }}">
-              </div>
+                    <label for="sector">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" value="{{ username }}">
+                </div>
                 <div class="form-group">
-                <label for="sector">File</label>
-                <input type="file" class="form-control" id="filee" name="filee">
+                    <label for="sector">TimeStamp</label>
+                    <input type="text" class="form-control" id="timestamp" name="timestamp" value="{{ timestamp }}">
+                </div>
+                <div class="form-group">
+                    <label for="sector">File</label>
+                    <input type="file" class="form-control" id="filee" name="filee">
               </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
