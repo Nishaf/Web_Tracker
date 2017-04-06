@@ -8,7 +8,11 @@
         </div>
         <div class="col-md-4 col-md-offset-4" style="margin-top: 30px;">
             <form action="{% url 'Add_Post' %}" method="post">{% csrf_token %}
-              <div class="form-group">
+                <div class="form-group">
+                <label for="sector">Sector</label>
+                <input type="text" class="form-control" id="0" name="0">
+              </div>
+                <div class="form-group">
                 <label for="1">Cluster</label>
                 <input type="text" class="form-control" id="1" name="1">
               </div>

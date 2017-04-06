@@ -1,7 +1,11 @@
+from time import strftime,gmtime
 
 
 def get_post_data(request):
     return {
+        'username': request.session['username'],
+        'timestamp': strftime("%a, %d %b %Y %H:%M:%S", gmtime()),
+        'Sector': request.POST['0'],
         'Cluster': request.POST['1'],
         'Sub_Cluster': request.POST['2'],
         'Congested':request.POST['3'],

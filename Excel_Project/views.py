@@ -5,18 +5,24 @@ from django.contrib.auth import authenticate, login,logout,user_logged_in
 from .forms import *
 from .extra_functions import *
 from pymongo import *
+import base64
+import json
+from json import dumps
 ##PrimaryKey== Sector + user + timestamp
 
 class HomePage(View):
+
     def get(self, request):
-        db = MongoClient()['Database1']
-        context1 = db.Table_data.find()
-        MongoClient().close()
-        for i in context1:
-            posts = i
-
-
-        return render(request,'check.html', {'posts': posts})
+        if not request.user.is_authenticated():
+            return render(request, 'login.html')
+        else:
+            mongo = MongoClient()
+            db = mongo['Database1']
+            context1 = db.Table_data.find()
+            MongoClient().close()
+            posts = [post for post in context1]
+            mongo.close()
+            return render(request,'home.html', {'posts': posts})
 
 class Add_Post(View):
     def get(self, request):
@@ -30,13 +36,81 @@ class Add_Post(View):
         MongoClient().close()
         return redirect('homepage')
 
+class EditPost(View):
+    def get(self, request, username, timestamp, sector):
+        mongo = MongoClient()
+        db = mongo['Database1']
+        post_data = db.Table_data.find_one({'username':username,'timestamp':timestamp,'Sector':sector})
+
+        return render(request,'edit_post.html', {'post':post_data,
+                                                'username':username,
+                                                 'timestamp':timestamp,
+                                                'sector':sector})
+
+    def post(self, request, username, timestamp, sector):
+        mongo = MongoClient()
+        db = mongo['Database1']
+        db.Table_data.update({'username':username,'timestamp':timestamp,'Sector':sector},get_post_data(request))
+        mongo.close()
+        return HttpResponse("Successful")
+
+class AddImage(View):
+    def insert_image(self,request):
+        with open("E:/6th Semester/Psychology/Pyschology notes/3.jpeg", "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
+        print(encoded_string)
+        mongo = MongoClient()
+        db = mongo['Database1']
+        db.images.insert({"username": request.session['username'] ,"image":encoded_string})
+
+    def retrieve_image(self,request):
+        mongo = MongoClient()
+        db = mongo['Database1']
+        data = db.images.find_one({'username': request.session['username']})
+        print(data)
+        mongo.close()
+        data1 = base64.b64decode(data['image'])
+        img = data1
+        img1 = img
+        print(img1)
+        #decode = img1.decode()
+        img_tag = '<img alt="sample" src="data:image/png;base64,{0}">'.format(img1.decode(base64))
+        return img_tag
+
+    def post(self, request, username, timestamp, sector):
+        #print(request.POST['image'])
+        print(username)
+        print(timestamp)
+        print(sector)
+        #print(request.POST['image'])
+        self.insert_image(request)
+        return HttpResponse("Hello")
+
+    def get(self, request, username, timestamp, sector):
+        img_tag = self.retrieve_image(request)
+        return HttpResponse(img_tag)
+
+
+
+
+class BlogView(View):
+    def get(self, request):
+        mongo = MongoClient()
+        db = mongo['Database1']
+        context1 = db.Table_data.find()
+        MongoClient().close()
+        posts = [post for post in context1]
+        posts.reverse()
+        mongo.close()
+        return render(request, 'blog_view.html', {'posts': posts})
 
 
 
 class Logout(View):
     def get(self,request):
         logout(request)
-        return redirect('index')
+        return redirect('homepage')
+
 
 class Login(View):
     #@my_login_required

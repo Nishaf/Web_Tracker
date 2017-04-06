@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+{% block body %}
+
+    <div class="container">
+        <div class=" col-md-8 col-md-offset-2"style="margin-top: 50px;" align="center">
+            <h2>Fill Out all the Details of the Post</h2>
+        </div>
+        <div class="col-md-4 col-md-offset-4" style="margin-top: 30px;">
+            <form action="{% url 'edit_post' username=username timestamp=timestamp sector=sector %}" method="post">{% csrf_token %}
+                {% for key,value in post.items %}
+                    {% if key != "username" and  key != "timestamp" and key != "Sector" %}
+                        <div class="form-group">
+                            <label for="sector">{{ key }}</label>
+                            <input type="text" class="form-control" id="{{ forloop.counter0 }}" name="{{ forloop.counter0 }}" value={{ value }}>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

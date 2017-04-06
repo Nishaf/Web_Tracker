@@ -41,7 +41,7 @@
                         {{ error_message }}
                         {% endif %}
               </h4>
-          <form class="form-signin" method="post">{% csrf_token %}
+          <form class="form-signin" action="{% url 'login' %}" method="post">{% csrf_token %}
               <h2 class="form-signin-heading" style="margin-top: 100px; text-align: center">Sign In</h2>
              <div style="margin-top: 50px;" >
                     <label for="inputUsername" class="sr-only">Username</label>

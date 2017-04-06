@@ -5,12 +5,11 @@
 {% endblock %}
 {% block header %}
     <ul class="nav navbar-nav">
-            <li><a href="#">Home</a></li>
-            <li class="active"><a href="#">History</a></li>
+            <li><a href="{% url 'homepage' %}">Home</a></li>
           </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">{{ name }}</a></li>
-                <li><a href = "#">SignOut</a></li>
+                <li><a href = "{% url 'logout' %}">SignOut</a></li>
             </ul>
 {% endblock %}
 {% block body %}
@@ -26,12 +25,14 @@
     <div class=" col-md-8 col-md-offset-2" align="center">
         <h2 class="form-signin-heading" style="margin-top: 100px; text-align: center">History</h2>
     <br>
+    <a href="{% url 'blog_view' %}">Blog View</a>
         <form style="align-content: right;" action="{% url 'Add_Post' %}">
             <button class="btn btn-primary" type="submit">Add Row</button>
         </form>
     <br>
             <table class="tg" >
                 <tr>
+                    <th class="tg-xirp">Sector</th>
                     <th class="tg-xirp">Cluster</th>
                     <th class="tg-be9z">Sub-Cluster</th>
                     <th class="tg-be9z">Congested</th>
@@ -65,11 +66,56 @@
                     <th class="tg-be9z">T-Mobile Store</th>
                     <th class="tg-be9z">Venue ACS</th>
                     <th class="tg-be9z">Cell Split ID</th>
+                    <th class="tg-be9z">Edit Post</th>
+                    <th class="tg-be9z">Add Images</th>
+
 
                 </tr>
                 {% for post in posts %}
                     <tr>
-                      <td>{{ post.Cluster }}</td>
+                        <td class="tg-pam3">{{ post.Sector }}</td>
+                        <td class="tg-pam3">{{ post.Cluster }}</td>
+                        <td class="tg-pam3">{{ post.Sub_Cluster }}</td>
+                        <td class="tg-pam3">{{ post.Congested }}</td>
+                        <td class="tg-pam3">{{ post.Leakage }}</td>
+                        <td class="tg-pam3">{{ post.DCR }}</td>
+                        <td class="tg-pam3">{{ post.AFR }}</td>
+                        <td class="tg-pam3">{{ post.Misc }}</td>
+                        <td class="tg-pam3">{{ post.Analysis }}</td>
+                        <td class="tg-pam3">{{ post.Last_updated }}</td>
+                        <td class="tg-pam3">{{ post.Comments }}</td>
+                        <td class="tg-pam3">{{ post.Optimization_Completed }}</td>
+                        <td class="tg-pam3">{{ post.Status }}</td>
+                        <td class="tg-pam3">{{ post.Perm_Solution }}</td>
+                        <td class="tg-pam3">{{ post.Development_Priority }}</td>
+                        <td class="tg-pam3">{{ post.Cell_Split }}</td>
+                        <td class="tg-pam3">{{ post.Coverage_Strategy }}</td>
+                        <td class="tg-pam3">{{ post.DART }}</td>
+                        <td class="tg-pam3">{{ post.Hardening_National }}</td>
+                        <td class="tg-pam3">{{ post.L1900_Capacity }}</td>
+                        <td class="tg-pam3">{{ post.L2100_Capacity }}</td>
+                        <td class="tg-pam3">{{ post.L700 }}</td>
+                        <td class="tg-pam3">{{ post.Market_Infill }}</td>
+                        <td class="tg-pam3">{{ post.Modernization }}</td>
+                        <td class="tg-pam3">{{ post.New_Build_Infill }}</td>
+                        <td class="tg-pam3">{{ post.Replacement }}</td>
+                        <td class="tg-pam3">{{ post.ROB }}</td>
+                        <td class="tg-pam3">{{ post.Rural_America }}</td>
+                        <td class="tg-pam3">{{ post.Sector_Add }}</td>
+                        <td class="tg-pam3">{{ post.Small_Cell_Strategy }}</td>
+                        <td class="tg-pam3">{{ post.T_Mobile_Store }}</td>
+                        <td class="tg-pam3">{{ post.Venue_ACS }}</td>
+                        <td class="tg-pam3">{{ post.Cell_Split_ID }}</td>
+                        <td class="tg-pam3"><a id="edit_post" name="edit_post" href="{% url 'edit_post' username=post.username timestamp=post.timestamp sector=post.Sector %}">Edit Post</a></td>
+                        <td class="tg-pam3">
+                            <form action="{% url 'add_image' username=post.username timestamp=post.timestamp sector=post.Sector%}" method="post">{% csrf_token %}
+                                <input type="file" id="image" name="image">
+                                <button type="submit">Save</button>
+                            </form>
+                        </td>
+                    <td class="tg-pam3">
+                            <a href="{% url 'add_image' username=post.username timestamp=post.timestamp sector=post.Sector%}" >View Image</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
@@ -78,37 +124,4 @@
 
 
 
-<!--
-  <td class="tg-pam3">{{ i.Cluster }}</td>
-                        <td class="tg-pam3">{{ i.Sub_Cluster }}</td>
-                        <td class="tg-pam3">{{ i.Congested }}</td>
-                        <td class="tg-pam3">{{ i.Leakage }}</td>
-                        <td class="tg-pam3">{{ i.DCR }}</td>
-                        <td class="tg-pam3">{{ i.AFR }}</td>
-                        <td class="tg-pam3">{{ i.Misc }}</td>
-                        <td class="tg-pam3">{{ i.Analysis }}</td>
-                        <td class="tg-pam3">{{ i.Last_updated }}</td>
-                        <td class="tg-pam3">{{ i.Comments }}</td>
-                        <td class="tg-pam3">{{ i.Optimization_Completed }}</td>
-                        <td class="tg-pam3">{{ i.Status }}</td>
-                        <td class="tg-pam3">{{ i.Perm_Solution }}</td>
-                        <td class="tg-pam3">{{ i.Development_Priority }}</td>
-                        <td class="tg-pam3">{{ i.Cell_Split }}</td>
-                        <td class="tg-pam3">{{ i.Coverage_Strategy }}</td>
-                        <td class="tg-pam3">{{ i.DART }}</td>
-                        <td class="tg-pam3">{{ i.Hardening_National }}</td>
-                        <td class="tg-pam3">{{ i.L1900_Capacity }}</td>
-                        <td class="tg-pam3">{{ i.L2100_Capacity }}</td>
-                        <td class="tg-pam3">{{ i.L700 }}</td>
-                        <td class="tg-pam3">{{ i.Market_Infill }}</td>
-                        <td class="tg-pam3">{{ i.Modernization }}</td>
-                        <td class="tg-pam3">{{ i.New_Build_Infill }}</td>
-                        <td class="tg-pam3">{{ i.Replacement }}</td>
-                        <td class="tg-pam3">{{ i.ROB }}</td>
-                        <td class="tg-pam3">{{ i.Rural_America }}</td>
-                        <td class="tg-pam3">{{ i.Sector_Add }}</td>
-                        <td class="tg-pam3">{{ i.Small_Cell_Strategy }}</td>
-                        <td class="tg-pam3">{{ i.T_Mobile_Store }}</td>
-                        <td class="tg-pam3">{{ i.Venue_ACS }}</td>
-                        <td class="tg-pam3">{{ i.Cell_Split_ID }}</td>
--->
+

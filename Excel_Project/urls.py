@@ -19,6 +19,12 @@ from .views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^blog_view/', BlogView.as_view(), name="blog_view"),
+    url(r'^add_image/(?P<username>.+)/(?P<timestamp>.+)/(?P<sector>.+)/', AddImage.as_view(), name="add_image"),
+    url(r'^edit_post/(?P<username>.+)/(?P<timestamp>.+)/(?P<sector>.+)/', EditPost.as_view(), name='edit_post'),
+    url(r'^logout/', Logout.as_view(), name="logout"),
+    url(r'^login/', Login.as_view(), name="login"),
+    url(r'^signup/', SignUp.as_view(), name="signup"),
     url(r'^add_post/',Add_Post.as_view(), name='Add_Post'),
     url(r'', HomePage.as_view(), name='homepage'),
 ]
