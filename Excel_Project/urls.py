@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^media/(?P<path>.*)$', serve, {
         'document_root': settings.MEDIA_ROOT,
     }),
+    url(r'^export_data/', ExportExcel.as_view(), name="export_data"),
     url(r'^blog_view/', BlogView.as_view(), name="blog_view"),
     url(r'^search_results/', SearchPost.as_view(), name="search_post"),
     url(r'^upload_file/', UploadExcelFile.as_view(), name="upload_file"),

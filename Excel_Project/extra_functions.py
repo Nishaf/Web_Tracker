@@ -1,4 +1,87 @@
 from time import strftime,gmtime
+import xlwt
+
+
+def export_data(results):
+    workbook = xlwt.Workbook(encoding="utf-8")
+    worksheet = workbook.add_sheet("Olx crawled results")
+    counter = 0
+    header(worksheet, counter)
+    counter += 1
+    for i in results:
+        worksheet.write(counter, 0, i['Sector'])
+        worksheet.write(counter, 1, i['Cluster'])
+        worksheet.write(counter, 2, i['Sub_Cluster'])
+        worksheet.write(counter, 3, i['Congested'])
+        worksheet.write(counter, 4, i['Leakage'])
+        worksheet.write(counter, 5, i['DCR'])
+        worksheet.write(counter, 6, i['AFR'])
+        worksheet.write(counter, 7, i['Misc'])
+        worksheet.write(counter, 8, i['Analysis'])
+        worksheet.write(counter, 9, i['Last_updated'])
+        worksheet.write(counter, 10, i['Comments'])
+        worksheet.write(counter, 11, i['Optimization_Completed'])
+        worksheet.write(counter, 12, i['Status'])
+        worksheet.write(counter, 13, i['Perm_Solution'])
+        worksheet.write(counter, 14, i['Development_Priority'])
+        worksheet.write(counter, 15, i['Cell_Split'])
+        worksheet.write(counter, 16, i['Coverage Strategy'])
+        worksheet.write(counter, 17, i['DART'])
+        worksheet.write(counter, 18, i['Hardening_National'])
+        worksheet.write(counter, 19, i['L1900_Capacity'])
+        worksheet.write(counter, 20, i['L2100_Capacity'])
+        worksheet.write(counter, 21, i['L700'])
+        worksheet.write(counter, 22, i['Market_Infill'])
+        worksheet.write(counter, 23, i['Modernization'])
+        worksheet.write(counter, 24, i['New_Build_Infill'])
+        worksheet.write(counter, 25, i['Replacement'])
+        worksheet.write(counter, 26, i['ROB'])
+        worksheet.write(counter, 27, i['Rural America'])
+        worksheet.write(counter, 28, i['Sector_Add'])
+        worksheet.write(counter, 29, i['Small_Cell_Strategy'])
+        worksheet.write(counter, 30, i['T_Mobile_Store'])
+        worksheet.write(counter, 31, i['Venue ACS'])
+        worksheet.write(counter, 32, i['Cell_Split_ID'])
+        counter += 1
+    workbook.save("E:\\WebTracker.xls")
+    print("created")
+
+
+def header(worksheet, i):
+    worksheet.write(i, 0, 'Sector')
+    worksheet.write(i, 1, 'Cluster')
+    worksheet.write(i, 2, 'Sub-Cluster')
+    worksheet.write(i, 3, 'Congested')
+    worksheet.write(i, 4, 'Leakage')
+    worksheet.write(i, 5, 'DCR')
+    worksheet.write(i, 6, 'AFR')
+    worksheet.write(i, 7, 'Misc')
+    worksheet.write(i, 8, 'Analysis(Why this site is on the list)')
+    worksheet.write(i, 9, 'Last updated (Date)')
+    worksheet.write(i, 10, 'Comments (What can be done short term)')
+
+    worksheet.write(i, 11, 'Optimization Completed(Yes/No)')
+    worksheet.write(i, 12, 'Status(Complete/In-progress)')
+    worksheet.write(i, 13, 'Perm Solution (Describe the solution)')
+    worksheet.write(i, 14, 'Development Priority')
+    worksheet.write(i, 15, 'Cell Split')
+    worksheet.write(i, 16, 'Coverage Strategy')
+    worksheet.write(i, 17, 'DART')
+    worksheet.write(i, 18, 'Hardening National')
+    worksheet.write(i, 19, 'L1900 Capacity')
+    worksheet.write(i, 20, 'L2100 Capacity')
+    worksheet.write(i, 21, 'L700')
+    worksheet.write(i, 22, 'Market Infill')
+    worksheet.write(i, 23, 'Modernization')
+    worksheet.write(i, 24, 'New Build Infill')
+    worksheet.write(i, 25, 'Replacement')
+    worksheet.write(i, 26, 'ROB')
+    worksheet.write(i, 27, 'Rural America')
+    worksheet.write(i, 28, 'Sector Add')
+    worksheet.write(i, 29, 'Small Cell Strategy')
+    worksheet.write(i, 30, 'T-Mobile Store')
+    worksheet.write(i, 31, 'Venue ACS')
+    worksheet.write(i, 32, 'Cell Split ID')
 
 
 def get_excel_data(i, time, sheet, request):

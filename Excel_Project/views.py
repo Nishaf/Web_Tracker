@@ -96,6 +96,14 @@ class RetrieveImage(View):
         return render(request, 'view_image.html', {'instance': instance, 'path':path})
 
 
+class ExportExcel(View):
+    def get(self, request):
+        mongo = MongoClient()
+        db = mongo['Database1']
+        results = db.Table_data.find()
+        export_data(results)
+        return redirect('homepage')
+
 class UploadExcelFile(View):
     def get(self, request):
         form = UploadFileForm(request.GET or None, request.FILES)
