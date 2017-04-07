@@ -104,7 +104,6 @@ class UploadExcelFile(View):
             if sheet.cell_value(i,0) is None or sheet.cell_value(i,0) is "":
                 continue
             else:
-                print(dict(get_excel_data(i,time,sheet, request)))
                 db.Table_data.insert(get_excel_data(i,time, sheet,request))
 
     def post(self, request):
