@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4d4e7978-2f3a-4bdd-bb58-af47699aba8c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel_Project/__init__.py" afterPath="$PROJECT_DIR$/Excel_Project/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel_Project/extra_functions.py" afterPath="$PROJECT_DIR$/Excel_Project/extra_functions.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Excel_Project/views.py" afterPath="$PROJECT_DIR$/Excel_Project/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/check.html" afterPath="$PROJECT_DIR$/templates/check.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/edit_post.html" afterPath="$PROJECT_DIR$/templates/edit_post.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,8 +29,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Excel_Project/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="63" column="21" lean-forward="true" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
+            <state relative-caret-position="167">
+              <caret line="60" column="29" lean-forward="true" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
               </folding>
@@ -92,8 +91,8 @@
       <file leaf-file-name="check.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/check.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="154" column="99" lean-forward="false" selection-start-line="154" selection-start-column="99" selection-end-line="154" selection-end-column="99" />
+            <state relative-caret-position="192">
+              <caret line="38" column="14" lean-forward="false" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -121,8 +120,8 @@
       <file leaf-file-name="edit_post.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/edit_post.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+            <state relative-caret-position="192">
+              <caret line="162" column="14" lean-forward="false" selection-start-line="162" selection-start-column="14" selection-end-line="162" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -169,7 +168,6 @@
         <option value="$PROJECT_DIR$/Images/models.py" />
         <option value="$PROJECT_DIR$/templates/blog_view.html" />
         <option value="$PROJECT_DIR$/templates/add_post.html" />
-        <option value="$PROJECT_DIR$/templates/edit_post.html" />
         <option value="$PROJECT_DIR$/templates/add_image.html" />
         <option value="$PROJECT_DIR$/Excel_Project/settings.py" />
         <option value="$PROJECT_DIR$/templates/login.html" />
@@ -180,6 +178,7 @@
         <option value="$PROJECT_DIR$/Excel_Project/urls.py" />
         <option value="$PROJECT_DIR$/Excel_Project/__init__.py" />
         <option value="$PROJECT_DIR$/Excel_Project/extra_functions.py" />
+        <option value="$PROJECT_DIR$/templates/edit_post.html" />
         <option value="$PROJECT_DIR$/templates/check.html" />
         <option value="$PROJECT_DIR$/Excel_Project/views.py" />
       </list>
@@ -696,7 +695,14 @@
       <option name="project" value="LOCAL" />
       <updated>1491555212536</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Edit_Completed">
+      <created>1491582142718</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1491582142718</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView">
@@ -771,7 +777,8 @@
     <MESSAGE value="Completed" />
     <MESSAGE value="Search Bar Completed" />
     <MESSAGE value="Export Data Completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Export Data Completed" />
+    <MESSAGE value="Edit_Completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit_Completed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1056,14 +1063,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/edit_post.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Excel_Project/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
@@ -1092,16 +1091,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/check.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="154" column="99" lean-forward="false" selection-start-line="154" selection-start-column="99" selection-end-line="154" selection-end-column="99" />
+        <state relative-caret-position="192">
+          <caret line="38" column="14" lean-forward="false" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/edit_post.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="162" column="14" lean-forward="false" selection-start-line="162" selection-start-column="14" selection-end-line="162" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Excel_Project/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="63" column="21" lean-forward="true" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="21" />
+        <state relative-caret-position="167">
+          <caret line="60" column="29" lean-forward="true" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
           </folding>

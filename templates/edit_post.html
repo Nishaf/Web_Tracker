@@ -21,14 +21,139 @@
         </div>
         <div class="col-md-4 col-md-offset-4" style="margin-top: 30px;">
             <form action="{% url 'edit_post' username=username timestamp=timestamp sector=sector %}" method="post">{% csrf_token %}
-                {% for key,value in post.items %}
-                    {% if key != "username" and  key != "timestamp" and key != "Sector" %}
-                        <div class="form-group">
-                            <label for="sector">{{ key }}</label>
-                            <input type="text" class="form-control" id="{{ forloop.counter0 }}" name="{{ forloop.counter0 }}" value={{ value }}>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                 <div class="form-group">
+                     <label for="sector">Sector</label>
+                     <input type="text" class="form-control" id="Sector" name="Sector" value={{ post.Sector }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Cluster</label>
+                     <input type="text" class="form-control" id="Cluster" name="Cluster" value={{ post.Cluster }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Sub_Cluster</label>
+                     <input type="text" class="form-control" id="Sub_Cluster" name="Sub_Cluster" value={{ post.Sub_Cluster }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Congested</label>
+                     <input type="text" class="form-control" id="Congested" name="Congested" value={{ post.Congested }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Leakage</label>
+                     <input type="text" class="form-control" id="Leakage" name="Leakage" value={{ post.Leakage }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">DCR</label>
+                     <input type="text" class="form-control" id="DCR" name="DCR" value={{ post.DCR }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">AFR</label>
+                     <input type="text" class="form-control" id="AFR" name="AFR" value={{ post.AFR }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Misc</label>
+                     <input type="text" class="form-control" id="Misc" name="Misc" value={{ post.Misc }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Analysis</label>
+                     <input type="text" class="form-control" id="Analysis" name="Analysis" value={{ post.Analysis }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Last_updated</label>
+                     <input type="text" class="form-control" id="Last_updated" name="Last_updated" value={{ post.Last_updated }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Comments</label>
+                     <input type="text" class="form-control" id="Comments" name="Comments" value={{ post.Comments }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Optimization_Completed</label>
+                     <input type="text" class="form-control" id="Optimization_Completed" name="Optimization_Completed" value={{post.Optimization_Completed }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Status</label>
+                     <input type="text" class="form-control" id="Status" name="Status" value={{ post.Status }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Perm_Solution</label>
+                     <input type="text" class="form-control" id="Perm_Solution" name="Perm_Solution" value={{ post.Perm_Solution }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Development_Priority</label>
+                     <input type="text" class="form-control" id="Development_Priority" name="Development_Priority" value={{post.Development_Priority  }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Cell_Split</label>
+                     <input type="text" class="form-control" id="Cell_Split" name="Cell_Split" value={{ post.Cell_Split }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Coverage_Strategy</label>
+                     <input type="text" class="form-control" id="Coverage_Strategy" name="Coverage_Strategy" value={{ post.Coverage_Strategy }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">DART</label>
+                     <input type="text" class="form-control" id="DART" name="DART" value={{ post.DART }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Hardening_National</label>
+                     <input type="text" class="form-control" id="Hardening_National" name="Hardening_National" value={{ post.Hardening_National }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">L1900_Capacity</label>
+                     <input type="text" class="form-control" id="L1900_Capacity" name="L1900_Capacity" value={{ post.L1900_Capacity }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">L2100_Capacity</label>
+                     <input type="text" class="form-control" id="L2100_Capacity" name="L2100_Capacity" value={{ post.L2100_Capacity }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">L700</label>
+                     <input type="text" class="form-control" id="L700" name="L700" value={{ post.L700 }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Market_Infill</label>
+                     <input type="text" class="form-control" id="Market_Infill" name="Market_Infill" value={{ post.Market_Infill }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Modernization</label>
+                     <input type="text" class="form-control" id="Modernization" name="Modernization" value={{ post.Modernization }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">New_Build_Infill</label>
+                     <input type="text" class="form-control" id="New_Build_Infill" name="New_Build_Infill" value={{ post.New_Build_Infill }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Replacement</label>
+                     <input type="text" class="form-control" id="Replacement" name="Replacement" value={{ post.Replacement }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">ROB</label>
+                     <input type="text" class="form-control" id="ROB" name="ROB" value={{ post.ROB }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Rural_America</label>
+                     <input type="text" class="form-control" id="Rural_America" name="Rural_America" value={{ post.Rural_America }}>
+                 </div>
+
+                <div class="form-group">
+                     <label for="sector">Sector_Add</label>
+                     <input type="text" class="form-control" id="Sector_Add" name="Sector_Add" value={{ post.Sector_Add }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Small_Cell_Strategy</label>
+                     <input type="text" class="form-control" id="Small_Cell_Strategy" name="Small_Cell_Strategy" value={{ post.Small_Cell_Strategy }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">T_Mobile_Store</label>
+                     <input type="text" class="form-control" id="T_Mobile_Store" name="T_Mobile_Store" value={{ post.T_Mobile_Store }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Venue_ACS</label>
+                     <input type="text" class="form-control" id="Venue_ACS" name="Venue_ACS" value={{ post.Venue_ACS }}>
+                 </div>
+                <div class="form-group">
+                     <label for="sector">Cell_Split_ID</label>
+                     <input type="text" class="form-control" id="Cell_Split_ID" name="Cell_Split_ID" value={{ post.Cell_Split_ID }}>
+                 </div>
 
               <button type="submit" class="btn btn-default">Submit</button>
             </form>

@@ -52,7 +52,7 @@ class EditPost(View):
         mongo = MongoClient()
         db = mongo['Database1']
         post_data = db.Table_data.find_one({'username':username,'timestamp':timestamp,'Sector':sector})
-        return render(request,'check.html', {'post':post_data,
+        return render(request,'edit_post.html', {'post':post_data,
                                                 'username':username,
                                                  'timestamp':timestamp,
                                                 'sector':sector})
