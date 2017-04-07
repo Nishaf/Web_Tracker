@@ -7,6 +7,7 @@ from .forms import *
 import xlrd
 import os
 from Images.models import ExcelFiles
+from Excel_Project.settings import MEDIA_URL
 
 class HomePage(View):
 
@@ -14,6 +15,7 @@ class HomePage(View):
         if not request.user.is_authenticated():
             return render(request, 'login.html')
         else:
+
             mongo = MongoClient()
             db = mongo['Database1']
             context1 = db.Table_data.find()
@@ -21,6 +23,7 @@ class HomePage(View):
             posts = [post for post in context1]
             mongo.close()
             return render(request,'home.html', {'posts': posts})
+
 
 class Add_Post(View):
     def get(self, request):
@@ -79,7 +82,8 @@ class RetrieveImage(View):
         for i in instance:
             print(path+i.image.url)
            # i.image.url = path+i.image.url
-        return render(request, 'view_image.html', {'instance':instance, 'path':path})
+        path = "{0}{1}".format(MEDIA_URL, i.image.url)
+        return render(request, 'view_image.html', {'instance': instance, 'path':path})
 
 
 class UploadExcelFile(View):
@@ -165,7 +169,7 @@ class SignUp(View):
                 if user.is_active:
                     login(request, user)
                     request.session['username'] = user.username
-                    return redirect('index')
+                    return redirect('homepage')
         else:
             context = {
                 'form': form,

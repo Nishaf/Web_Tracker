@@ -25,24 +25,24 @@
     <div class=" col-md-8 col-md-offset-2" align="center">
         <h2 class="form-signin-heading" style="margin-top: 100px; text-align: center">History</h2>
         <br>
-        <div class="col-md-8 col-md-offset-2">
-            <div class="col-md-2">
+            <div class="col-md-2" align="center">
             <form action="{% url 'upload_file' %}" method="get">
-                <button class="btn-primary" type="submit">Upload File</button>
+                <button class="btn btn-primary" type="submit">Upload File</button>
             </form>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2" align="center">
                 <form action="{% url 'blog_view' %}" method="get">
-                    <button  type="submit" class="btn-primary" href="">Blog View</button>
+                    <button  type="submit" class="btn btn-primary">Blog View</button>
                 </form>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2" align="center">
                 <form style="align-content: right;" action="{% url 'Add_Post' %}">
                     <button class="btn btn-primary" type="submit">Add Row</button>
                 </form>
             </div>
-        </div>
-            <table class="tg" >
+            <br><br>
+    </div>
+        <table class="tg" >
                 <tr>
                     <th class="tg-xirp">Sector</th>
                     <th class="tg-xirp">Cluster</th>

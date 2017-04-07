@@ -17,10 +17,15 @@ from django.conf.urls import url
 from django.contrib import admin
 from .views import *
 from Excel_Project import settings
+from django.contrib.staticfiles import views
+from django.views.static import serve
 from django.conf.urls.static import static
 admin.autodiscover()
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+url(r'^media/(?P<path>.*)$', serve),
+    url(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+    }),
     url(r'^blog_view/', BlogView.as_view(), name="blog_view"),
     url(r'^upload_file/', UploadExcelFile.as_view(), name="upload_file"),
     url(r'^view_image/(?P<username>.+)/(?P<timestamp>.+)/(?P<sector>.+)/', RetrieveImage.as_view(), name="retrieve_image"),
@@ -32,6 +37,8 @@ urlpatterns = [
     url(r'^add_post/',Add_Post.as_view(), name='Add_Post'),
     url(r'', HomePage.as_view(), name='homepage'),
 ]
+
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

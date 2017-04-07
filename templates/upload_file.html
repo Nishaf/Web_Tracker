@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    Upload File
+{% endblock %}
+{% block header %}
+    <ul class="nav navbar-nav">
+            <li><a href="{% url 'homepage' %}">Home</a></li>
+          </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">{{ name }}</a></li>
+                <li><a href = "{% url 'logout' %}">SignOut</a></li>
+            </ul>
+{% endblock %}
+
 {% block body %}
     <div class="container">
         <div class=" col-md-8 col-md-offset-2" style="margin-top: 50px;" align="center">
