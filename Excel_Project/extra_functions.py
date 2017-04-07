@@ -5,7 +5,7 @@ import xlwt
 def export_data(results):
     workbook = xlwt.Workbook(encoding="utf-8")
     worksheet = workbook.add_sheet("Olx crawled results")
-    style = xlwt.easyxf('pattern: pattern solid, fore_colour grey;')
+    style = xlwt.easyxf('pattern: pattern solid, fore_colour yellow;')
     counter = 0
     header(worksheet, counter, style)
     counter += 1
