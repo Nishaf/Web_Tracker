@@ -26,7 +26,7 @@ def export_data(results):
         worksheet.write(counter, 13, i['Perm_Solution'])
         worksheet.write(counter, 14, i['Development_Priority'])
         worksheet.write(counter, 15, i['Cell_Split'])
-        worksheet.write(counter, 16, i['Coverage Strategy'])
+        worksheet.write(counter, 16, i['Coverage_Strategy'])
         worksheet.write(counter, 17, i['DART'])
         worksheet.write(counter, 18, i['Hardening_National'])
         worksheet.write(counter, 19, i['L1900_Capacity'])
@@ -37,11 +37,11 @@ def export_data(results):
         worksheet.write(counter, 24, i['New_Build_Infill'])
         worksheet.write(counter, 25, i['Replacement'])
         worksheet.write(counter, 26, i['ROB'])
-        worksheet.write(counter, 27, i['Rural America'])
+        worksheet.write(counter, 27, i['Rural_America'])
         worksheet.write(counter, 28, i['Sector_Add'])
         worksheet.write(counter, 29, i['Small_Cell_Strategy'])
         worksheet.write(counter, 30, i['T_Mobile_Store'])
-        worksheet.write(counter, 31, i['Venue ACS'])
+        worksheet.write(counter, 31, i['Venue_ACS'])
         worksheet.write(counter, 32, i['Cell_Split_ID'])
         counter += 1
     workbook.save("E:\\WebTracker.xls")
@@ -108,7 +108,7 @@ def get_excel_data(i, time, sheet, request):
                     'Perm_Solution':sheet.cell_value(i,13),
                     'Development_Priority':sheet.cell_value(i,14),
                     'Cell_Split':sheet.cell_value(i,15),
-                    'Coverage Strategy':sheet.cell_value(i,16),
+                    'Coverage_Strategy':sheet.cell_value(i,16),
                     'DART':sheet.cell_value(i,17),
                     'Hardening_National':sheet.cell_value(i,18),
                     'L1900_Capacity':sheet.cell_value(i,19),
@@ -119,11 +119,11 @@ def get_excel_data(i, time, sheet, request):
                     'New_Build_Infill':sheet.cell_value(i,24),
                     'Replacement':sheet.cell_value(i,25),
                     'ROB':sheet.cell_value(i,26),
-                    'Rural America':sheet.cell_value(i,27),
+                    'Rural_America':sheet.cell_value(i,27),
                     'Sector_Add':sheet.cell_value(i,28),
                     'Small_Cell_Strategy':sheet.cell_value(i,29),
                     'T_Mobile_Store':sheet.cell_value(i,30),
-                    'Venue ACS':sheet.cell_value(i,31),
+                    'Venue_ACS':sheet.cell_value(i,31),
                     'Cell_Split_ID':sheet.cell_value(i,32),
             }
 
