@@ -37,6 +37,16 @@ class Add_Post(View):
         MongoClient().close()
         return redirect('homepage')
 
+
+class SearchPost(View):
+    def post(self, request):
+        search = request.POST['search']
+        mongo = MongoClient()
+        db = mongo['Database1']
+        result = db.Table_data.find({'Sector': search})
+        mongo.close()
+        return render(request, 'home.html',{'posts': result})
+
 class EditPost(View):
     def get(self, request, username, timestamp, sector):
         mongo = MongoClient()
@@ -71,7 +81,7 @@ class AddImage(View):
         if form.is_valid():
             instance = form.save()
             instance.save()
-            return HttpResponse("Added Successfully")
+            return redirect('homepage')
 
 
 class RetrieveImage(View):

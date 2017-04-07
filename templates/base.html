@@ -31,8 +31,23 @@
           <a class="navbar-brand" href="{% url 'homepage' %}">WEB TRACKER</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            {% block header %}
-            {% endblock %}
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+            </ul>
+            <div class="col-sm-3 col-md-3" align="right">
+                <form class="navbar-form" role="search" method="post" action="{% url 'search_post' %}">{% csrf_token %}
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" id="search" name="search">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">{{ name }}</a></li>
+                <li><a href = "{% url 'logout' %}">SignOut</a></li>
+            </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

@@ -3,15 +3,7 @@
 {% block title %}
     History
 {% endblock %}
-{% block header %}
-    <ul class="nav navbar-nav">
-            <li><a href="{% url 'homepage' %}">Home</a></li>
-          </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">{{ name }}</a></li>
-                <li><a href = "{% url 'logout' %}">SignOut</a></li>
-            </ul>
-{% endblock %}
+
 {% block body %}
     <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
