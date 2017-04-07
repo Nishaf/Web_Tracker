@@ -98,11 +98,14 @@ class RetrieveImage(View):
 
 class ExportExcel(View):
     def get(self, request):
+        return render(request, 'download.html')
+
+    def post(self, request):
         mongo = MongoClient()
         db = mongo['Database1']
         results = db.Table_data.find()
         export_data(results)
-        return redirect('homepage')
+        return redirect('export_data')
 
 class UploadExcelFile(View):
     def get(self, request):

@@ -33,8 +33,8 @@
                 </form>
             </div>
             <div class="col-md-2" align="center">
-                <form style="align-content: right;" action="{% url 'export_data' %}">
-                    <button class="btn btn-primary" type="submit">Download Sheet</button>
+                <form style="align-content: right;" action="{% url 'export_data' %}" method="post">{% csrf_token %}
+                    <button class="btn btn-primary" type="submit" >Download Sheet</button>
                 </form>
             </div>
             <br><br>
